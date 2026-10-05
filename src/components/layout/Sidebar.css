@@ -1,0 +1,109 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-normal);
+  display: flex;
+  flex-direction: column;
+  transition: width var(--transition-normal);
+  z-index: 100;
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-width-collapsed);
+}
+
+.sidebar-header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-5);
+  border-bottom: 1px solid var(--border-normal);
+}
+
+.logo {
+  font-size: var(--font-size-title-section);
+  font-weight: var(--font-weight-bold);
+  color: #FFFFFF;
+}
+
+.logo-collapsed {
+  font-size: var(--font-size-title-section);
+  font-weight: var(--font-weight-bold);
+  color: #FFFFFF;
+  margin: 0 auto;
+}
+
+.neon-text {
+  color: var(--color-neon);
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: var(--space-4) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  overflow-y: auto;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+  border-left: 3px solid transparent;
+}
+
+.sidebar-link:hover {
+  background-color: #111A26;
+  color: var(--text-primary);
+}
+
+.sidebar-link.active {
+  background-color: var(--color-primary-alpha);
+  color: #60A5FA;
+  border-left-color: var(--color-primary);
+}
+
+.sidebar-icon {
+  flex-shrink: 0;
+}
+
+.sidebar-text {
+  margin-left: var(--space-3);
+  white-space: nowrap;
+}
+
+.sidebar-footer {
+  padding: var(--space-4);
+  border-top: 1px solid var(--border-normal);
+}
+
+.collapse-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-2);
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.collapse-btn:hover {
+  background-color: #111A26;
+  color: var(--text-primary);
+}
+
+.sidebar.collapsed .collapse-btn {
+  justify-content: center;
+}
