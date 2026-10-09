@@ -8,6 +8,7 @@
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-normal);
   transition: all var(--transition-fast);
+  cursor: pointer;
 }
 
 .btn-primary {

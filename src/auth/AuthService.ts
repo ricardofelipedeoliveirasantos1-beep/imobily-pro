@@ -1,6 +1,6 @@
-import { User } from '../types/auth';
+import type { User } from '../types/auth';
 import { MOCK_USERS } from './mockAuth';
-import { ROLE_PERMISSIONS, Permission } from './permissions';
+import { ROLE_PERMISSIONS, type Permission } from './permissions';
 
 const SESSION_KEY = '@imobilypro:session';
 

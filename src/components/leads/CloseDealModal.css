@@ -1,0 +1,13 @@
+.close-deal-modal {
+  max-width: 500px;
+}
+
+.btn-success {
+  background-color: #10b981 !important;
+  color: white !important;
+  border-color: #059669 !important;
+}
+
+.btn-success:hover {
+  background-color: #059669 !important;
+}

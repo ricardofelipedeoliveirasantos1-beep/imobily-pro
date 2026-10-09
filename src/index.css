@@ -83,6 +83,12 @@
   padding: 0;
 }
 
+html, body, #root {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  width: 100%;
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--bg-primary);
@@ -96,6 +102,10 @@ body {
 h1 {
   font-size: var(--font-size-title-main);
   font-weight: var(--font-weight-bold);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 h2 {

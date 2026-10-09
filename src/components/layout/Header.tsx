@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Bell, HelpCircle, User, LogOut, Settings } from 'lucide-react';
+import { Search, Bell, HelpCircle, User, LogOut, Settings, Menu } from 'lucide-react';
 import { IconButton } from '../ui/Button';
 import { useAuth } from '../../auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -8,9 +8,11 @@ import './Header.css';
 interface HeaderProps {
   collapsed: boolean;
   pageTitle: string;
+  onMenuClick?: () => void;
+  menuOpen?: boolean;
 }
 
-export function Header({ collapsed, pageTitle }: HeaderProps) {
+export function Header({ collapsed, pageTitle, onMenuClick, menuOpen = false }: HeaderProps) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = React.useState(false);
@@ -25,6 +27,18 @@ export function Header({ collapsed, pageTitle }: HeaderProps) {
   return (
     <header className={`header ${collapsed ? 'sidebar-collapsed' : ''}`}>
       <div className="header-left">
+        {onMenuClick && (
+          <button
+            type="button"
+            className="menu-toggle"
+            onClick={onMenuClick}
+            aria-label="Abrir menu de navegação"
+            aria-expanded={menuOpen}
+            aria-controls="app-sidebar"
+          >
+            <Menu size={22} />
+          </button>
+        )}
         <h1 className="header-title">{pageTitle}</h1>
       </div>
 
@@ -42,7 +56,7 @@ export function Header({ collapsed, pageTitle }: HeaderProps) {
           <IconButton>
             <Bell size={18} />
           </IconButton>
-          <IconButton>
+          <IconButton className="help-btn">
             <HelpCircle size={18} />
           </IconButton>
           

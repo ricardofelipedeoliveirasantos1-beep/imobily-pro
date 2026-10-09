@@ -1,15 +1,17 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { 
-  Home, Building, Users, Briefcase, Calendar, 
-  FileText, PenTool, DollarSign, BarChart2, 
-  Globe, Link, Settings, ChevronLeft, ChevronRight 
+import {
+  Home, Building, Users, Briefcase, Calendar,
+  FileText, PenTool, DollarSign, BarChart2,
+  Globe, Link, Settings, ChevronLeft, ChevronRight, X
 } from 'lucide-react';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import './Sidebar.css';
 
 interface SidebarProps {
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
+  mobileOpen?: boolean;
+  onCloseMobile?: () => void;
 }
 
 const menuItems = [
@@ -27,34 +29,47 @@ const menuItems = [
   { name: 'Configurações', icon: Settings, path: '/settings' },
 ];
 
-export function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
+export function Sidebar({ collapsed, setCollapsed, mobileOpen = false, onCloseMobile }: SidebarProps) {
+  const isMobile = useIsMobile();
+  const showCollapsed = collapsed && !isMobile;
+
   return (
-    <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+    <aside id="app-sidebar" className={`sidebar ${showCollapsed ? 'collapsed' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
       <div className="sidebar-header">
-        {collapsed ? (
+        {showCollapsed ? (
           <div className="logo-collapsed">IM<span className="neon-text">P</span></div>
         ) : (
           <div className="logo">IMOBILY<span className="neon-text">PRO</span></div>
         )}
+
+        <button
+          type="button"
+          className="sidebar-close"
+          onClick={onCloseMobile}
+          aria-label="Fechar menu"
+        >
+          <X size={20} />
+        </button>
       </div>
 
       <nav className="sidebar-nav">
         {menuItems.map((item) => (
-          <NavLink 
-            key={item.name} 
-            to={item.path} 
+          <NavLink
+            key={item.name}
+            to={item.path}
             className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
-            title={collapsed ? item.name : undefined}
+            title={showCollapsed ? item.name : undefined}
+            onClick={onCloseMobile}
           >
             <item.icon className="sidebar-icon" size={18} />
-            {!collapsed && <span className="sidebar-text">{item.name}</span>}
+            {!showCollapsed && <span className="sidebar-text">{item.name}</span>}
           </NavLink>
         ))}
       </nav>
 
       <div className="sidebar-footer">
-        <button 
-          className="collapse-btn" 
+        <button
+          className="collapse-btn"
           onClick={() => setCollapsed(!collapsed)}
           title={collapsed ? 'Expandir' : 'Recolher'}
         >

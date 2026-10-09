@@ -107,3 +107,57 @@
 .sidebar.collapsed .collapse-btn {
   justify-content: center;
 }
+
+.sidebar-close {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border-normal);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  background-color: transparent;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-close:hover {
+  color: var(--text-primary);
+  background-color: var(--card-hover);
+}
+
+@media (max-width: 767px) {
+  .sidebar,
+  .sidebar.collapsed {
+    width: clamp(270px, 82vw, 310px);
+    transform: translateX(-100%);
+    transition: transform var(--transition-normal);
+    z-index: 300;
+    box-shadow: 16px 0 40px rgba(0, 0, 0, 0.45);
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-header {
+    position: relative;
+    padding-right: 56px;
+  }
+
+  .sidebar-close {
+    display: flex;
+    position: absolute;
+    right: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .sidebar-footer {
+    display: none;
+  }
+
+  .sidebar-link {
+    height: 46px;
+  }
+}

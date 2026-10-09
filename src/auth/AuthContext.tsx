@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { User, AuthSession } from '../types/auth';
+import type { AuthSession } from '../types/auth';
 import { AuthService } from './AuthService';
-import { Permission } from './permissions';
+import type { Permission } from './permissions';
 
 interface AuthContextType extends AuthSession {
   login: (email: string, pass: string) => Promise<void>;

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { Home, Users, Briefcase, FileText, Settings, Shield, Activity, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Home, Users, Briefcase, FileText, Settings, Shield, Activity, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Header } from './Header';
+import { useIsMobile } from '../../hooks/useIsMobile';
+import { useMobileDrawer } from '../../hooks/useMobileDrawer';
 import './MainLayout.css'; // Reusing main layout styles
 
 const adminMenuItems = [
@@ -16,6 +18,9 @@ const adminMenuItems = [
 export function AdminLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const isMobile = useIsMobile();
+  const drawer = useMobileDrawer();
+  const showCollapsed = collapsed && !isMobile;
 
   const getPageTitle = (path: string) => {
     switch (path) {
@@ -31,28 +36,42 @@ export function AdminLayout() {
 
   return (
     <div className="app-container">
-      <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`} style={{ backgroundColor: '#05070a' }}>
+      <aside
+        id="app-sidebar"
+        className={`sidebar ${showCollapsed ? 'collapsed' : ''} ${drawer.open ? 'mobile-open' : ''}`}
+        style={{ backgroundColor: '#05070a' }}
+      >
         <div className="sidebar-header" style={{ borderBottomColor: '#1A2533' }}>
-          {collapsed ? (
+          {showCollapsed ? (
             <div className="logo-collapsed" style={{ color: 'var(--color-error)' }}><Shield size={24} /></div>
           ) : (
             <div className="logo" style={{ color: 'var(--color-error)' }}><Shield size={18} style={{ marginRight: 8, verticalAlign: 'text-bottom' }} />ADMIN<span className="neon-text" style={{ color: '#fff', textShadow: 'none' }}>PRO</span></div>
           )}
+
+          <button
+            type="button"
+            className="sidebar-close"
+            onClick={drawer.closeDrawer}
+            aria-label="Fechar menu"
+          >
+            <X size={20} />
+          </button>
         </div>
 
         <nav className="sidebar-nav">
           <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', padding: '12px 12px 4px', fontWeight: 'bold' }}>
-            {!collapsed && 'PLATAFORMA'}
+            {!showCollapsed && 'PLATAFORMA'}
           </div>
           {adminMenuItems.map((item) => (
             <NavLink 
               key={item.name} 
               to={item.path} 
               className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
-              title={collapsed ? item.name : undefined}
+              title={showCollapsed ? item.name : undefined}
+              onClick={drawer.closeDrawer}
             >
               <item.icon className="sidebar-icon" size={18} />
-              {!collapsed && <span className="sidebar-text">{item.name}</span>}
+              {!showCollapsed && <span className="sidebar-text">{item.name}</span>}
             </NavLink>
           ))}
         </nav>
@@ -68,9 +87,20 @@ export function AdminLayout() {
           </button>
         </div>
       </aside>
+
+      <div
+        className={`sidebar-overlay ${drawer.open ? 'visible' : ''}`}
+        onClick={drawer.closeDrawer}
+        role="presentation"
+      />
       
       <div className={`main-wrapper ${collapsed ? 'sidebar-collapsed' : ''}`}>
-        <Header collapsed={collapsed} pageTitle={getPageTitle(location.pathname)} />
+        <Header
+          collapsed={collapsed}
+          pageTitle={getPageTitle(location.pathname)}
+          onMenuClick={drawer.openDrawer}
+          menuOpen={drawer.open}
+        />
         
         <main className="main-content">
           <Outlet />

@@ -4,7 +4,7 @@
 [✓] 02 — Autenticação, Perfis e Controle de Acesso
 [✓] 02.1 — GitHub e Versionamento
 
-[ ] 03 — Modelagem de Dados
+[✓] 03 — Modelagem de Dados
 [ ] 04 — Super Admin
 [ ] 05 — Gestão de Imóveis
 [ ] 06 — CRM / Leads / Clientes

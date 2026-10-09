@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card } from '../../components/ui/Card';
 import { Users, CheckCircle, BarChart2 } from 'lucide-react';
 import { MetricCard } from '../../components/dashboard/MetricCard';

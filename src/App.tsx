@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './auth/AuthContext';
 import { ProtectedRoute } from './auth/guards/ProtectedRoute';
@@ -12,6 +11,9 @@ import { Dashboard } from './pages/Dashboard';
 import { Login } from './pages/auth/Login';
 import { Unauthorized } from './pages/auth/Unauthorized';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
+import { Accounts } from './pages/admin/Accounts';
+import { Properties } from './pages/Properties';
+import { Leads } from './pages/Leads';
 
 function PlaceholderPage({ title }: { title: string }) {
   return (
@@ -49,8 +51,8 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<MainLayout />}>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/properties" element={<PlaceholderPage title="Imóveis" />} />
-              <Route path="/leads" element={<PlaceholderPage title="Leads" />} />
+              <Route path="/properties" element={<Properties />} />
+              <Route path="/leads" element={<Leads />} />
               <Route path="/clients" element={<PlaceholderPage title="Clientes" />} />
               <Route path="/appointments" element={<PlaceholderPage title="Agenda" />} />
               <Route path="/proposals" element={<PlaceholderPage title="Propostas" />} />
@@ -68,7 +70,7 @@ function App() {
             <Route element={<AdminLayout />}>
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="/admin/brokers" element={<PlaceholderPage title="Gerenciar Corretores" />} />
-              <Route path="/admin/accounts" element={<PlaceholderPage title="Contas" />} />
+              <Route path="/admin/accounts" element={<Accounts />} />
               <Route path="/admin/billing" element={<PlaceholderPage title="Planos & Assinaturas" />} />
               <Route path="/admin/logs" element={<PlaceholderPage title="Logs do Sistema" />} />
               <Route path="/admin/settings" element={<PlaceholderPage title="Configurações Globais" />} />

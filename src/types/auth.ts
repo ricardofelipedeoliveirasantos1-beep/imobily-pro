@@ -1,5 +1,4 @@
-import { Role, AccountStatus } from '../auth/roles';
-import { Permission } from '../auth/permissions';
+import type { Role, AccountStatus } from '../auth/roles';
 
 export interface User {
   id: string;
